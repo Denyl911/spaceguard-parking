@@ -1,5 +1,5 @@
 <script setup>
-const route = useRoute();
+  const route = useRoute();
 </script>
 
 <template>
@@ -26,7 +26,7 @@ const route = useRoute();
     </div>
     <div class="px-4">
       <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
-        Entrada de Vehiculos
+        Entrada de Vehículos
       </h3>
       <ul class="mb-5 text-sm font-medium">
         <li>
@@ -50,7 +50,7 @@ const route = useRoute();
       </ul>
     </div>
     <div class="px-4">
-      <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">Costos</h3>
+      <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">Costos (Entrada Vehículos)</h3>
       <ul class="mb-5 text-sm font-medium">
         <li>
           <NuxtLink
@@ -183,6 +183,74 @@ const route = useRoute();
         </li>
       </ul>
     </div>
+    <div class="px-4">
+      <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
+        Servicios adicionales
+      </h3>
+      <ul class="mb-5 text-sm font-medium">
+        <li>
+          <NuxtLink
+            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
+            :class="{ active: route.path == '/Servicios_Add/Servicios_Registro' }"
+            to="/Servicios_Add/Servicios_Registro"
+          >
+            <span class="select-none">Registro</span>
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink
+            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
+            :class="{ active: route.path == '/Servicios_Add/Servicios_Modificacion' }"
+            to="/Servicios_Add/Servicios_Modificacion"
+          >
+            <span Modificacionlass="select-none">Modificacion</span>
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink
+            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
+            :class="{ active: route.path == '/Servicios_Add/Servicios_Consulta' }"
+            to="/Servicios_Add/Servicios_Consulta"
+          >
+            <span class="select-none">Consulta</span>
+          </NuxtLink>
+        </li>
+      </ul>
+    </div>
+    <div class="px-4">
+      <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
+        Pensionados
+      </h3>
+      <ul class="mb-5 text-sm font-medium">
+        <li>
+          <NuxtLink
+            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
+            :class="{ active: route.path == '/Pensionados/PensionadosRegistro' }"
+            to="/Pensionados/PensionadosRegistro"
+          >
+            <span class="select-none">Registro</span>
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink
+            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
+            :class="{ active: route.path == '/Pensionados/PensionadosModificacion' }"
+            to="/Pensionados/PensionadosModificacion"
+          >
+            <span Modificacionlass="select-none">Modificacion</span>
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink
+            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
+            :class="{ active: route.path == '/Pensionados/PensionadosConsulta' }"
+            to="/Pensionados/PensionadosConsulta"
+          >
+            <span class="select-none">Consulta</span>
+          </NuxtLink>
+        </li>
+      </ul>
+    </div>
   </nav>
 </template>
 
@@ -244,3 +312,4 @@ ul.breadcrumb li span {
   background: rgba(0, 0, 0, 0.9);
 }
 </style>
+

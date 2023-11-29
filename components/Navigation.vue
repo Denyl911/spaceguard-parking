@@ -31,7 +31,8 @@
         { label: 'Promociones consultar', value: 'L'},
         { label: 'Inventario registro', value: 'C' },
         { label: 'Inventario modificacion', value: 'M'},
-        { label: 'Inventario consulta', value: 'N'}
+        { label: 'Inventario consulta', value: 'N'},
+        { label: 'Servicios adicionales', value: 'O'}
                  
     ]
 
@@ -64,6 +65,8 @@
             router.push({name: 'Inventario-InventarioModificacion'})
         }else if(E === 'N'){
             router.push({name: 'Inventario-InventarioConsulta'})
+        }else if(E === 'O'){
+            router.push({name: 'Servicios_Add-ServiciosConsulta'})
         }
     }
     

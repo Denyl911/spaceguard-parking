@@ -1,9 +1,21 @@
 <template>
-    <main class="container px-4 pt-3">
-        <h1>Index page</h1>
-        <MazBtn>Button</MazBtn>
-        <MazCheckbox color="primary">
-            Check
-        </MazCheckbox>
-    </main>
+    <div class="container p-4">
+      <h1 style="font-size: 36px">Página de inicio</h1>
+      <h2>SPACEGUARD</h2><br>
+      <h3>◀ Navega del lado izquierdo</h3><br>
+
+      <img
+          class="imagen-proporcionada"
+          src="@/assets/Logo.png"
+          alt="Mi Imagen"
+        />
+    </div>
 </template>
+
+
+<style>
+.imagen-proporcionada {
+  width: 100%;
+  height: 500px;
+}
+</style>
