@@ -4,7 +4,7 @@
        <SideBar />
         <div style="margin-left: 15vw;">
             <div style="padding-top: 9vh;">
-                <slot />
+                <slot/>
             </div>
         </div>
     </div>

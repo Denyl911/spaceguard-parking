@@ -25,8 +25,9 @@
         <MazSelect
             v-model="IDSer"
             label="ID Servicio:"
-            :options="[{value: 1, label:'Lavado'}, {value: 2, label:'Encerado'}]"
-          />
+            :options="[{value:'01LAVADO', label:'01LAVADO'}, {value: '02ENCERADO', label:'02ENCERADO'},
+            {value: '03PULIDO', label:'03PULIDO'}, {value: '04ACEITE', label: '04ACEITE'}, {value: '05LLANTAS', label: '05LLANTAS'}]"
+        />
         <MazInput class="mt-1 mb-1" v-model="placa" label="Placa" disabled />
         <MazInput
           class="mt-1 mb-1"
@@ -46,7 +47,7 @@
           label="Duración"
           :disabled="true"
         />
-        <MazInput class="mb-1" v-model="costo" label="Costo" :disabled="true" />
+        <MazInput class="mb-1" v-model="costo" label="Costo" :disabled="true"/>
         <MazInput
           class="mb-1"
           v-model="materiales"
@@ -60,8 +61,7 @@
           :disabled="true"
         />
       </div>
-      <MazBtn rounded class="mt-6 w-40" color="black" pastel @click="registro"
-        >Registrar</MazBtn
+      <MazBtn rounded class="mt-6 w-40" color="black" pastel @click="registro">Registrar</MazBtn
       >
     </div>
   </section>
@@ -71,10 +71,12 @@
 import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useToast } from 'maz-ui';
+
 const toast = useToast();
-const route = useRoute()
+const route = useRoute();
+
 let IDSer = ref('');
-let placa = ref(route.query.placa);
+let placa = ref('');
 let nombre = ref('');
 let descripcion = ref('');
 let duracion = ref('');
@@ -84,11 +86,21 @@ let empleado = ref('');
 
 const router = useRouter();
 
+// placa = route.query.placa;
+// console.log(placa)
 
-onMounted(() => {
- placa = route.query.placa;
- console.log(placa);
-});
+// onMounted(() => {
+//   let registros = JSON.parse(localStorage.getItem('entrada'));
+//   if (registros) {
+//     registros = registros.map((el) => {
+//       return [
+//         el.placa
+//       ];
+//     });
+//   } else {
+//     registros = [];
+//   }
+// });
 
 const registro = () => {
   if (
@@ -97,12 +109,10 @@ const registro = () => {
     !descripcion.value &&
     !duracion.value &&
     !costo.value &&
-    !materiales.value
+    !materiales.value && !empleado.value && !placa.value
   ) {
-    toast.error('Faltan datos', {
-      position: 'bottom',
-      timeout: 3000,
-    });
+    alert(placa);
+    toast.error('Faltan datos', { position: 'bottom', timeout: 3000 });
   } else {
     const data = {
       id: IDSer.value,
@@ -112,6 +122,7 @@ const registro = () => {
       costo: costo.value,
       materiales: materiales.value,
       empleado: empleado.value,
+      placa: placa.value
     };
     let registros = JSON.parse(localStorage.getItem('servicios'));
     if (registros) {
@@ -119,51 +130,42 @@ const registro = () => {
     } else {
       registros = [data];
     }
-    localStorage.setItem('servicios', JSON.stringify(registros));
-    router.push({ name: 'Servicios_Add-Servicios_Consulta' });
-
-    toast.error('Registro exitoso!', {
-      position: 'bottom',
-      timeout: 3000,
-    });
+      localStorage.setItem('servicios', JSON.stringify(registros));
+      router.push({ name: 'Servicios_Add-Servicios_Consulta' });
+      toast.error('Registro exitoso!', {position: 'bottom', timeout: 3000});
   }
 };
 
 watch(IDSer, (newVal) => {
-  if (newVal === '1') {
-    IDSer.value = '01LAVADO';
+  if (newVal === '01LAVADO') {
     nombre.value = 'Lavado';
     descripcion.value = 'Lavado de vehículo';
     duracion.value = '30 minutos';
     costo.value = '$50.00';
     materiales.value = 'Agua, jabón, cepillos';
     empleado.value = 'Jorge Iván';
-  } else if (newVal === '2') {
-    IDSer.value = '02ENCERADO';
+  } else if (newVal === '02ENCERADO') {
     nombre.value = 'Encerado';
     descripcion.value = 'Encerado de la carrocería';
     duracion.value = '2 horas';
     costo.value = '$300.00';
     materiales.value = 'Cera, espoja, agua, trapo';
     empleado.value = 'Victor';
-  } else if (newVal === '3') {
-    IDSer.value = '03PULIDO';
+  } else if (newVal === '03PULIDO') {
     nombre.value = 'Pulido';
     descripcion.value = 'Pulir carrocería y llantas';
     duracion.value = '2 horas';
     costo.value = '$400.00';
     materiales.value = 'Pulidora, cera, jabón, agua, trapos';
     empleado.value = 'Rodrigo';
-  } else if (newVal === '4') {
-    IDSer.value = '04ACEITE';
+  } else if (newVal === '04ACEITE') {
     nombre.value = 'Cambio de aceite';
     descripcion.value = 'Cambiar aceite y filtro';
     duracion.value = '30 minutos';
     costo.value = '$800.00';
     materiales.value = 'Aceite específico, filtro, llaves/pinzas.';
     empleado.value = 'Luis';
-  } else if (newVal === '5') {
-    IDSer.value = '05LLANTAS';
+  } else if (newVal === '05LLANTAS') {
     nombre.value = 'Revisión de llantas';
     descripcion.value = 'Se calibra la presión del aire, fugas y posición';
     duracion.value = '1 hora';

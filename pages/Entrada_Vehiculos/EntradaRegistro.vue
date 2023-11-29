@@ -35,9 +35,7 @@
                 <p>Fecha: {{ fechaActual }}</p>
                 <p>Lugar asignado: {{ lugDisp+1 }}</p>
                 <template #footer>
-                    <MazBtn @click="cerrarTicketDialogo" color="success">
-                    Cerrar
-                    </MazBtn>
+                    <MazBtn @click="cerrarTicketDialogo" color="success">Cerrar</MazBtn>
                 </template>
             </MazDialog>
         </div>
@@ -105,16 +103,12 @@
         }    
     }
     
-
     function Registro (){
         let primerformato = false;
         let segundoformato = false;
 
         if(!placa.value){
-            toast.error('Ingresa una placa', {
-                    position: 'bottom',
-                    timeout: 3000,
-                }); 
+            toast.error('Ingresa una placa', { position: 'bottom', timeout: 3000 });
         } else {
             const primerformatoValido = /^[A-Z]{3}\d{3}[A-Z]$/;
             const segundoformatoValido= /^([A-Z]{3}-\d{3}-[A-Z])$/;
@@ -125,7 +119,6 @@
             } else if (segundoformatoValido.test(placa.value)) {              
                 segundoformato = true;
             }
-
 
             let registros = JSON.parse(localStorage.getItem('entrada')) || [];
 
@@ -155,10 +148,7 @@
                 localStorage.setItem('entrada', JSON.stringify(registros));
                 //router.push({ name: 'Entrada_Vehiculos-EntradaConsulta' });
                                                                             
-                toast.success('Registro éxitoso', {
-                    position: 'bottom',
-                    timeout: 3000,
-                });      
+                toast.success('Registro éxitoso', { position: 'bottom', timeout: 3000 });
                 lugDisp.value--;
                 localStorage.setItem('lugDisp', lugDisp.value);
                 mostrarDialogo.value = true;                            
@@ -172,15 +162,11 @@
     }  
 
     const agregarServicioAdicional = () => {
-        // Redirigir a la pestaña de 'servicios adicionales'
-        router.push({ name: 'Servicios_Add-Servicios_Registro', query: {
-            placa: placa.value
-        }});
+        router.push({ name: 'Servicios_Add-Servicios_Registro'});
         cerrarDialogo();
     };
 
     const cerrarDialogo = () => {
-        // Cerrar el diálogo
         mostrarDialogo.value = false;
     };
 
@@ -191,19 +177,16 @@
         timeout: 3000,
         });
     } else {
-        // Mostrar el diálogo del ticket
         horaImpresion.value = new Date().toLocaleTimeString();
         mostrarTicket.value = true;
-    }
+        }
     }
 
     function cerrarTicketDialogo() {
-        // Cerrar el diálogo del ticket
         mostrarTicket.value = false;
     }
 
     const convertirAMayusculas = () => {
-        // Convierte el valor de placa a mayúsculas
         placa.value = placa.value.toUpperCase();
     };
 </script>

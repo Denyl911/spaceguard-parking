@@ -32,6 +32,7 @@ onMounted(() => {
         el.costo,
         el.materiales,
         el.empleado,
+        el.placa
       ];
     });
   } else {
@@ -40,7 +41,7 @@ onMounted(() => {
 
   let tabla = document.getElementById('tabla');
   new Grid({
-    columns: ['ID', 'Nombre', 'Descripcion', 'Duracion', 'Costo', 'Materiales', 'Empleado asignado'],
+    columns: ['ID', 'Nombre', 'Descripcion', 'Duracion', 'Costo', 'Materiales', 'Empleado asignado', 'placa'],
     data: registros,
   }).render(tabla);
 });
