@@ -4,8 +4,8 @@
       <h1 style="color: black; font-family: Verdana; font-size: 36px">
         <b>Servicios Adicionales - Consulta</b>
       </h1>
-      <MazInput class="mt-8" v-model="buscarPromocion" label="ID Promoción" />
-      <MazBtn class="mt-2 mb-5" color="black">Consultar servicio</MazBtn>
+      <MazInput class="mt-8" v-model="buscarPlaca" label="ID Promoción"/>
+      <MazBtn class="mt-2 mb-5" color="black" @click="BuscarPlaca">Consultar servicio asignado a la placa</MazBtn>
     </div>
     <div id="tabla" class="mt-8"></div>
   </section>
@@ -17,11 +17,14 @@ import { Grid } from 'gridjs';
 import { ref } from 'vue';
 import MazInput from 'maz-ui/components/MazInput';
 import 'gridjs/dist/theme/mermaid.css';
+import { useToast } from 'maz-ui';
+const toast = useToast();
 
-let buscarPromocion = ref('');
+let buscarPlaca = ref('');
 
-onMounted(() => {
-  let registros = JSON.parse(localStorage.getItem('servicios'));
+let registros = JSON.parse(localStorage.getItem('servicios'));
+
+onMounted(() => {  
   if (registros) {
     registros = registros.map((el) => {
       return [
@@ -32,7 +35,7 @@ onMounted(() => {
         el.costo,
         el.materiales,
         el.empleado,
-        el.placa
+        el.placaDos
       ];
     });
   } else {
@@ -45,4 +48,27 @@ onMounted(() => {
     data: registros,
   }).render(tabla);
 });
+
+function BuscarPlaca() {
+    if (!buscarPlaca.value) {
+      toast.error('Ingresa una placa', {
+                    position: 'bottom',
+                    timeout: 3000,
+                });  
+    } else {
+      let placaExistente = registros.find((item) => item[7].includes(buscarPlaca.value));
+      if (placaExistente) {
+        toast.success('Placa existente', {
+                    position: 'bottom',
+                    timeout: 3000,
+                });  
+      } else {
+        toast.error('La placa no existe', {
+                    position: 'bottom',
+                    timeout: 3000,
+                });  
+      }
+    }
+  }  
+
 </script>

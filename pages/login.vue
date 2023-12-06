@@ -1,23 +1,23 @@
 <script setup>
-definePageMeta({
-  layout: "nothing",
-});
+  definePageMeta({
+    layout: "nothing",
+  });
 
-let email = ref("");
-let pass = ref("");
+  let email = ref("");
+  let pass = ref("");
 
-let correo = "spaceguard";
-let contra = "parking";
+  let correo = "spaceguard";
+  let contra = "parking";F
 
-const router = useRouter();
+  const router = useRouter();
 
-function login() {
-  if (email.value === correo && pass.value === contra) {
-    router.push({ name: "Entrada_Vehiculos-EntradaRegistro" });
-  } else {
-    alert("El correo o la contraseña es inválida");
+  function login() {
+    if (email.value === correo && pass.value === contra) {
+      router.push({ name: "Entrada_Vehiculos-EntradaRegistro" });
+    } else {
+      alert("El correo o la contraseña es inválida");
+    }
   }
-}
 </script>
 
 <template>

@@ -51,8 +51,8 @@
   
     const toast = useToast();
 
-    let placa = ref('');    
-    let lugDisp = ref(3);
+    let placa = ref('');
+    let lugDisp = ref(20);
     let horaActual = ref(new Date().toLocaleTimeString());
     let fechaActual = ref(new Date().toLocaleDateString());
     const mostrarDialogo = ref(false);
@@ -162,7 +162,7 @@
     }  
 
     const agregarServicioAdicional = () => {
-        router.push({ name: 'Servicios_Add-Servicios_Registro'});
+        router.push({ name: 'Servicios_Add-Servicios_Registro', route: {placa}});
         cerrarDialogo();
     };
 

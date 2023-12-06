@@ -50,8 +50,8 @@
         } else {
             const precioConSimbolo = `\$${precio.value}`;
             const data = {
-            tiempoEstancia: tiempoEstancia.value,
-            precio: precioConSimbolo,
+                tiempoEstancia: tiempoEstancia.value,
+                precio: precioConSimbolo,
             };
 
             let registros = JSON.parse(localStorage.getItem('costosEVehiculos')) || [];

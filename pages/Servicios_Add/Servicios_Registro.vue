@@ -11,24 +11,13 @@
         >
           Datos del servicio:
         </h2>
-        <!-- <section class="bg-slate-400">
-          
-          <label for="tiempoEstancia">ID servicio:</label>
-          <select v-model="IDSer" style="width: 765px; height: 40px">
-            <option value="1">01LAVADO</option>
-            <option value="2">02ENCERADO</option>
-            <option value="3">03PULIDO</option>
-            <option value="4">04ACEITE</option>
-            <option value="5">05LLANTAS</option>
-          </select>
-        </section> -->
         <MazSelect
             v-model="IDSer"
             label="ID Servicio:"
             :options="[{value:'01LAVADO', label:'01LAVADO'}, {value: '02ENCERADO', label:'02ENCERADO'},
             {value: '03PULIDO', label:'03PULIDO'}, {value: '04ACEITE', label: '04ACEITE'}, {value: '05LLANTAS', label: '05LLANTAS'}]"
         />
-        <MazInput class="mt-1 mb-1" v-model="placa" label="Placa" disabled />
+        <MazInput class="mt-1 mb-1" v-model="placaDos" label="Placa" disabled/>
         <MazInput
           class="mt-1 mb-1"
           v-model="nombre"
@@ -61,8 +50,18 @@
           :disabled="true"
         />
       </div>
-      <MazBtn rounded class="mt-6 w-40" color="black" pastel @click="registro">Registrar</MazBtn
-      >
+      <MazBtn rounded class="mt-6 w-40" color="black" pastel @click="registro">Registrar</MazBtn>
+      <MazBtn rounded class="mt-6 w-40" color="black" pastel @click="MostrarTicket">Imprimir ticket</MazBtn>
+      <MazDialog v-model="mostrarTicket" title="Detalle del Ticket">
+                <p>Placa: {{ placaDos }}</p>
+                <p>Hora: {{ hora }}</p>
+                <p>Fecha: {{ fecha }}</p>
+                <p>Lugar asignado: {{ lugar }}</p>
+                <p>Servicio adicional: {{ IDSer }}</p>
+                <template #footer>
+                    <MazBtn @click="cerrarTicketDialogo" color="success">Cerrar</MazBtn>
+                </template>
+            </MazDialog>
     </div>
   </section>
 </template>
@@ -73,10 +72,8 @@ import { useRouter } from 'vue-router';
 import { useToast } from 'maz-ui';
 
 const toast = useToast();
-const route = useRoute();
 
 let IDSer = ref('');
-let placa = ref('');
 let nombre = ref('');
 let descripcion = ref('');
 let duracion = ref('');
@@ -84,55 +81,68 @@ let costo = ref('');
 let materiales = ref('');
 let empleado = ref('');
 
+let placaDos = ref('');
+let lugar = ref('');
+let fecha = ref('');
+let hora = ref('');
+const mostrarTicket = ref(false);
+
 const router = useRouter();
 
-// placa = route.query.placa;
-// console.log(placa)
-
-// onMounted(() => {
-//   let registros = JSON.parse(localStorage.getItem('entrada'));
-//   if (registros) {
-//     registros = registros.map((el) => {
-//       return [
-//         el.placa
-//       ];
-//     });
-//   } else {
-//     registros = [];
-//   }
-// });
+let registros = JSON.parse(localStorage.getItem('entrada'));
+onMounted(() => {
+    if (registros) {
+      registros = registros.map((el) => {
+        return [
+          el.placa,
+          el.lugDisp,
+          el.fecha,
+          el.hora
+        ];
+      });
+    } else {
+      registros = [];
+    }
+    // Obtener la última placa ingresada
+    const ultimaPlaca = registros.length > 0 ? registros[registros.length - 1] : null;    
+    placaDos.value = (ultimaPlaca[0]);
+    lugar.value = (ultimaPlaca[1]);
+    fecha.value = (ultimaPlaca[2]);
+    hora.value = (ultimaPlaca[3]);
+});
 
 const registro = () => {
-  if (
-    !IDSer.value &&
-    !nombre.value &&
-    !descripcion.value &&
-    !duracion.value &&
-    !costo.value &&
-    !materiales.value && !empleado.value && !placa.value
-  ) {
-    alert(placa);
+  if (!placaDos.value) {
+    toast.error('Faltan datos', { position: 'bottom', timeout: 3000 });
+  } else if (!IDSer.value) {
     toast.error('Faltan datos', { position: 'bottom', timeout: 3000 });
   } else {
-    const data = {
-      id: IDSer.value,
-      nombre: nombre.value,
-      descripcion: descripcion.value,
-      duracion: duracion.value,
-      costo: costo.value,
-      materiales: materiales.value,
-      empleado: empleado.value,
-      placa: placa.value
-    };
-    let registros = JSON.parse(localStorage.getItem('servicios'));
-    if (registros) {
-      registros.push(data);
+    let registros = JSON.parse(localStorage.getItem('servicios')) || [];
+    
+    // Verificar si ya existe un servicio con la misma placa y ID
+    const servicioExistente = registros.some((servicio) => servicio.placaDos === placaDos.value && servicio.id === IDSer.value);
+
+    if (servicioExistente) {
+      toast.error('Este servicio ya está registrado para la placa especificada', { position: 'bottom', timeout: 3000 });
     } else {
-      registros = [data];
-    }
+      const data = {
+        id: IDSer.value,
+        nombre: nombre.value,
+        descripcion: descripcion.value,
+        duracion: duracion.value,
+        costo: costo.value,
+        materiales: materiales.value,
+        empleado: empleado.value,
+        placaDos: placaDos.value
+      };
+      
+      registros.push(data);
       localStorage.setItem('servicios', JSON.stringify(registros));
-      router.push({ name: 'Servicios_Add-Servicios_Consulta' });
-      toast.error('Registro exitoso!', {position: 'bottom', timeout: 3000});
+      placaDos.value = '';  // Limpiar el campo placaDos después de un registro exitoso
+      //router.push({ name: 'Servicios_Add-Servicios_Consulta' });     
+      toast.success('Registro exitoso!', {position: 'bottom', timeout: 3000});
+      mostrarTicket.value = true;
+    }
   }
 };
 
@@ -174,4 +184,23 @@ watch(IDSer, (newVal) => {
     empleado.value = 'Jared';
   }
 });
+
+
+    function MostrarTicket() {
+      if (!IDSer.value) {
+          toast.error('No hay información para mostrar en el ticket', {
+          position: 'bottom',
+          timeout: 3000,
+        });
+      } else if(!placaDos.value){
+        toast.error('No hay información para mostrar en el ticket',{
+          position: 'bottom',
+          timeout: 3000,});
+      } else{
+        mostrarTicket.value = true;
+      }
+    }
+    function cerrarTicketDialogo() {
+        mostrarTicket.value = false;
+    }
 </script>
