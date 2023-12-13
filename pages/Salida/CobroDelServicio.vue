@@ -73,7 +73,7 @@ let horaActual = ref(new Date().toLocaleTimeString());
 let fechaActual = ref(new Date().toLocaleDateString());
 const mostrarTicket = ref(false);
 const horaImpresion = ref('');
-const serviciosAdd = ref('');
+const serviciosAdd = ref(0);
 let total = ref(0);
 let registros = [];
 let precios = [];
@@ -149,7 +149,9 @@ function Registro() {
     if (servAdd.length > 0) {
       servAdd.forEach((el) => {
         total.value = Number(total.value) + Number(el.costo.substring(1));
-        total = total.value.toFixed(2);
+        serviciosAdd.value =
+          Number(serviciosAdd.value) + Number(el.costo.substring(1));
+        total.value = total.value.toFixed(2);
       });
     }
     MostrarTicket();
