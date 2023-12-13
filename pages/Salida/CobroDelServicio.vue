@@ -48,7 +48,7 @@
         <p>Hora de entrada: {{ entrada }}</p>
         <p>Hora de salida: {{ horaImpresion }}</p>
         <p>Fecha: {{ fechaActual }}</p>
-        <p v-if="serviciosAdd">Servicios Adicionales: ${{ serviciosAdd }}</p>
+        <p>Servicios Adicionales: ${{ serviciosAdd ?? 0 }}</p>
         <p>Total: ${{ total }}</p>
         <template #footer>
           <MazBtn @click="cerrarTicketDialogo" color="success">Cobrar</MazBtn>
@@ -71,14 +71,13 @@ let lugDisp = ref(20);
 let entrada = ref('');
 let horaActual = ref(new Date().toLocaleTimeString());
 let fechaActual = ref(new Date().toLocaleDateString());
-const mostrarDialogo = ref(false);
 const mostrarTicket = ref(false);
 const horaImpresion = ref('');
 const serviciosAdd = ref('');
 let total = ref(0);
-let registros;
-let precios;
-let servicios;
+let registros = [];
+let precios = [];
+let servicios = [];
 
 const actualizarHora = () => {
   horaActual.value = new Date().toLocaleTimeString();
@@ -105,10 +104,10 @@ onBeforeUnmount(() => {
 });
 
 onMounted(() => {
-  registros = JSON.parse(localStorage.getItem('entrada'));
-  precios = JSON.parse(localStorage.getItem('costosEVehiculos'));
-  servicios = JSON.parse(localStorage.getItem('servicios'));
-  const storedLugDisp = localStorage.getItem('lugDisp');
+  registros = JSON.parse(localStorage.getItem('entrada')) || [];
+  precios = JSON.parse(localStorage.getItem('costosEVehiculos')) || [];
+  servicios = JSON.parse(localStorage.getItem('servicios')) || [];
+  const storedLugDisp = localStorage.getItem('lugDisp') || 20;
   if (storedLugDisp !== null) {
     lugDisp.value = parseInt(storedLugDisp);
   }
