@@ -21,7 +21,7 @@
         <MazInput class="mb-1" v-model="titulo" label="Título" />
         <MazInput class="mb-1" v-model="mensaje" label="Mensaje" />
       </div>
-      <MazBtn rounded class="mt-6 w-40" color="black" pastel @click="registro"
+      <MazBtn rounded class="mt-6 w-52" color="info" @click="registro"
         >Registrar</MazBtn
       >
     </div>

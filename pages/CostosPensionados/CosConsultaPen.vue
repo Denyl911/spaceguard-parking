@@ -4,7 +4,7 @@
       <h1 style="color: black; font-family: Verdana; font-size: 36px">
         <b>Costos para pensionados - Consulta</b>
       </h1>
-      <div class="w-3/4 bg-gradienttwo rounded-lg shadow-md">
+      <div class="w-3/4 bg-gradienttwo rounded-lg">
         <h2
           style="color: white; font-family: Verdana; font-size: 36px"
           class="mt-8"
@@ -13,7 +13,7 @@
         </h2>
       </div>
     </div>
-    <div id="tabla" class="mt-4"></div>
+    <div id="tabla" class="mt-4 mx-5"></div>
     <div class="container p-8">
       <MazBtn
         rounded
@@ -31,9 +31,6 @@
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
-//import MazInput from 'maz-ui/components/MazInput'
-//<MazInput class="mt-8" v-model="buscarTiempo" label="Tiempo de estancia especifico"/>
-//<MazBtn class="mt-2 mb-5" color="black" @click="BuscarCosto">Buscar Costo</MazBtn>
 import { Grid } from 'gridjs';
 import 'gridjs/dist/theme/mermaid.css';
 
@@ -59,8 +56,11 @@ onMounted(() => {
   new Grid({
     columns: ['Tiempo de estancia', 'Precio'],
     data: registros,
-    search: {
-      placeholder: 'Ingresa el tiempo o precio a buscar',
+    search: true,
+    language: {
+      search: {
+        placeholder: 'Buscar',
+      },
     },
   }).render(tabla);
 });

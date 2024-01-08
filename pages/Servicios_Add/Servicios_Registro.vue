@@ -55,7 +55,7 @@
           :disabled="true"
         /> -->
       </div>
-      <MazBtn rounded class="mt-6 w-40" color="black" pastel @click="registro"
+      <MazBtn rounded class="mt-6 w-52" color="info" @click="registro"
         >Registrar</MazBtn
       >
       <MazDialog v-model="mostrarTicket" title="Detalle del Ticket">
@@ -109,10 +109,12 @@ onMounted(() => {
   // Obtener la última placa ingresada
   const ultimaPlaca =
     registros.length > 0 ? registros[registros.length - 1] : null;
-  placaDos.value = ultimaPlaca[0];
-  lugar.value = ultimaPlaca[1];
-  fecha.value = ultimaPlaca[2];
-  hora.value = ultimaPlaca[3];
+  if (ultimaPlaca) {
+    placaDos.value = ultimaPlaca[0];
+    lugar.value = ultimaPlaca[1];
+    fecha.value = ultimaPlaca[2];
+    hora.value = ultimaPlaca[3];
+  }
 });
 
 const registro = () => {

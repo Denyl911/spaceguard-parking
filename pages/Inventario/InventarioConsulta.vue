@@ -5,7 +5,7 @@
         <b>Inventario - Consulta</b>
       </h1>
     </div>
-    <div id="tabla" class="mt-8"></div>
+    <div id="tabla" class="mt-8 mx-5"></div>
   </section>
 </template>
 

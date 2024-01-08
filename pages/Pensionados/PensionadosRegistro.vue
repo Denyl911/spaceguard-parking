@@ -4,18 +4,21 @@
       <h1 style="color: black; font-family: Verdana; font-size: 36px">
         <b>Vehículos pensionados - Registro</b>
       </h1>
-      <MazBtn class="mt-8 mb-5" color="black"
+      <MazBtn class="mt-8 mb-5 mr-3" color="black"
         >Lugares disponibles: {{ lugDispPensionados }}</MazBtn
       >
       <MazBtn
-        class="mt-8 mb-5"
+        class="mt-8 mb-5 mr-3"
         :style="{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }"
         >Hora actual: {{ horaActual }}</MazBtn
       >
       <MazBtn
-        class="mt-8 mb-5"
+        class="mt-8 mb-5 mr-3"
         :style="{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }"
         >Fecha actual: {{ fechaActual }}</MazBtn
+      >
+      <MazBtn class="mt-8" color="success"
+        >Lugar a asignar: {{ lugDispPensionados }}</MazBtn
       >
       <div class="w-3/4 border bg-gradienttwo p-8 rounded-lg shadow-md">
         <h2
@@ -83,22 +86,8 @@
           </select>
         </section>
       </div>
-      <MazBtn rounded class="mt-6 w-40" color="black" pastel @click="registro"
+      <MazBtn rounded class="mt-6 w-52" color="info" @click="registro"
         >Registrar</MazBtn
-      >
-    </div>
-    <div style="float: left; margin-left: 850px">
-      <MazBtn class="mt-8" color="success"
-        >Lugar asignado:<br />{{ lugDispPensionados }}</MazBtn
-      >
-    </div>
-    <div style="clear: both"></div>
-    <div>
-      <MazBtn rounded class="mt-6 w-40" color="black" pastel
-        >Servicio adicional</MazBtn
-      >
-      <MazBtn rounded class="mt-6 w-40" color="black" pastel
-        >Promociones</MazBtn
       >
     </div>
   </section>

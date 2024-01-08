@@ -5,7 +5,7 @@
         <b>Vehículos pensionados - Consulta</b>
       </h1>
     </div>
-    <div id="tabla" class="mt-8"></div>
+    <div id="tabla" class="mt-8 mx-5"></div>
   </section>
 </template>
 
@@ -17,7 +17,6 @@ import 'gridjs/dist/theme/mermaid.css';
 onMounted(() => {
   let registros = JSON.parse(localStorage.getItem('pensionados'));
   if (registros) {
-    console.log(registros);
     registros = registros.map((el) => {
       return [
         el.nombre,

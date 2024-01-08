@@ -1,86 +1,102 @@
 <template>
-   <section class="bg-slate-400">
-        <div class="container p-4">
-            <h1 style="color: black; font-family: Verdana; font-size: 36px;"><b>Costos - Registro</b></h1>
-            <div class = "w-3/4 border bg-gradienttwo p-8 rounded-lg shadow-md">
-                <h2 style="color: white; font-family: Verdana; font-size: 36px;" class="mt-8">Datos de los costos:</h2>
-                <section class="bg-slate-400">
-                    <label for="tiempoEstancia">Tiempo de estancia:   </label>
-                    <select v-model="tiempoEstancia" style="width: 780px; height: 40px;">
-                        <option value="Menos de 1 hora">Menos de 1 hora</option>
-                        <option value="1 hora">1 hora</option>
-                        <option value="1 día">1 día</option>
-                        <option value="1 semana">1 semana</option>
-                        <option value="1 mes">1 mes</option>
-                    </select>
-                </section>
-                <MazInput class="mt-5" v-model="precio" label="Precio" @input="validarPrecio"/>                
-            </div>            
-            <MazBtn rounded class="mt-6 w-40" color="black" pastel @click="Registro">Registrar</MazBtn>
-        </div>
-    </section>
+  <section class="bg-slate-400">
+    <div class="container p-4">
+      <h1 style="color: black; font-family: Verdana; font-size: 36px">
+        <b>Costos - Registro</b>
+      </h1>
+      <div class="w-3/4 border bg-gradienttwo p-8 rounded-lg shadow-md">
+        <h2
+          style="color: white; font-family: Verdana; font-size: 36px"
+          class="mt-8"
+        >
+          Datos de los costos:
+        </h2>
+        <section class="bg-slate-400">
+          <label for="tiempoEstancia">Tiempo de estancia: <br /></label>
+          <select
+            v-model="tiempoEstancia"
+            style="min-width: 57vw; height: 40px; border-radius: 10px"
+          >
+            <option value="Menos de 1 hora">Menos de 1 hora</option>
+            <option value="1 hora">1 hora</option>
+            <option value="1 día">1 día</option>
+            <option value="1 semana">1 semana</option>
+            <option value="1 mes">1 mes</option>
+          </select>
+        </section>
+        <MazInput
+          class="mt-5"
+          v-model="precio"
+          label="Precio"
+          @input="validarPrecio"
+        />
+      </div>
+      <MazBtn rounded class="mt-6 w-52" color="info" @click="Registro"
+        >Registrar</MazBtn
+      >
+    </div>
+  </section>
 </template>
 
-
 <script setup>
-    import { ref } from 'vue'
-    import { useRouter } from 'vue-router'
-    import MazInput from 'maz-ui/components/MazInput'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import MazInput from 'maz-ui/components/MazInput';
 
-    import { useToast } from 'maz-ui';
-  
-    const toast = useToast();
+import { useToast } from 'maz-ui';
 
-    let tiempoEstancia = ref('');
-    let precio = ref('');
-    
-    const router = useRouter()
+const toast = useToast();
 
-    function Registro() {
-        if (!tiempoEstancia.value) {
-            toast.error('Elije el tiempo de estancia', {
-            position: 'bottom',
-            timeout: 3000,
-            });
-        } else if (!precio.value) {
-            toast.error('Ingresa el precio', {
-            position: 'bottom',
-            timeout: 3000,
-            });
-        } else {
-            const precioConSimbolo = `\$${precio.value}`;
-            const data = {
-                tiempoEstancia: tiempoEstancia.value,
-                precio: precioConSimbolo,
-            };
+let tiempoEstancia = ref('');
+let precio = ref('');
 
-            let registros = JSON.parse(localStorage.getItem('costosEVehiculos')) || [];
+const router = useRouter();
 
-            // Verificar si el tiempoEstancia ya existe
-            const existeRegistro = registros.some(
-                (registro) => registro.tiempoEstancia === tiempoEstancia.value
-            );
+function Registro() {
+  if (!tiempoEstancia.value) {
+    toast.error('Elije el tiempo de estancia', {
+      position: 'bottom',
+      timeout: 3000,
+    });
+  } else if (!precio.value) {
+    toast.error('Ingresa el precio', {
+      position: 'bottom',
+      timeout: 3000,
+    });
+  } else {
+    const precioConSimbolo = `\$${precio.value}`;
+    const data = {
+      tiempoEstancia: tiempoEstancia.value,
+      precio: precioConSimbolo,
+    };
 
-            if (existeRegistro) {
-            toast.error('Ya existe un registro para este tiempo de estancia', {
-                position: 'bottom',
-                timeout: 3000,
-            });
-            } else {
-                registros.push(data);
-                localStorage.setItem('costosEVehiculos', JSON.stringify(registros));
+    let registros = JSON.parse(localStorage.getItem('costosEVehiculos')) || [];
 
-                toast.success('Registro éxitoso', {
-                    position: 'bottom',
-                    timeout: 3000,
-                });
-                //router.push({ name: 'index' });
-            }
-        }
+    // Verificar si el tiempoEstancia ya existe
+    const existeRegistro = registros.some(
+      (registro) => registro.tiempoEstancia === tiempoEstancia.value
+    );
+
+    if (existeRegistro) {
+      toast.error('Ya existe un registro para este tiempo de estancia', {
+        position: 'bottom',
+        timeout: 3000,
+      });
+    } else {
+      registros.push(data);
+      localStorage.setItem('costosEVehiculos', JSON.stringify(registros));
+
+      toast.success('Registro éxitoso', {
+        position: 'bottom',
+        timeout: 3000,
+      });
+      //router.push({ name: 'index' });
     }
+  }
+}
 
-    function validarPrecio() {
-        // Utiliza una expresión regular para permitir solo números
-        precio.value = precio.value.replace(/\D/g, '');
-    }
+function validarPrecio() {
+  // Utiliza una expresión regular para permitir solo números
+  precio.value = precio.value.replace(/\D/g, '');
+}
 </script>

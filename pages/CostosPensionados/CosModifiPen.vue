@@ -13,7 +13,10 @@
         </h2>
         <section class="bg-slate-400">
           <label for="tiempoEstancia">Tiempo de estancia:</label>
-          <select v-model="tiempoEstancia" style="width: 775px; height: 40px">
+          <select
+            v-model="tiempoEstancia"
+            style="min-width: 57vw; height: 40px; border-radius: 10px"
+          >
             <option value="1 semana">1 semana</option>
             <option value="1 mes">1 mes</option>
             <option value="2 meses">2 meses</option>

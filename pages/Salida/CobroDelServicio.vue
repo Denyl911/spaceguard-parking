@@ -30,11 +30,13 @@
           :disabled="lugDisp === 0"
         />
       </div>
-      <MazBtn rounded class="mt-6 w-40" color="black" pastel @click="Registro"
+      <MazBtn
+        rounded
+        class="mt-6 w-52 mr-32"
+        color="secondary"
+        @click="Registro"
         >Buscar</MazBtn
       >
-    </div>
-    <div>
       <MazBtn
         rounded
         class="mt-6 w-40"
@@ -43,6 +45,8 @@
         @click="MostrarTicket"
         >Imprimir ticket</MazBtn
       >
+    </div>
+    <div>
       <MazDialog v-model="mostrarTicket" title="Detalle del Ticket" noClose>
         <p>Placa: {{ placa }}</p>
         <p>Hora de entrada: {{ entrada }}</p>
