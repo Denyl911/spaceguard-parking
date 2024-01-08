@@ -89,6 +89,44 @@ const route = useRoute();
     </div>
     <div class="px-4">
       <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
+        Costos para pensionados
+      </h3>
+      <ul class="mb-5 text-sm font-medium">
+        <li>
+          <NuxtLink
+            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
+            :class="{
+              active: route.path == '/CostosPensionados/CosRegistroPen',
+            }"
+            to="/CostosPensionados/CosRegistroPen"
+          >
+            <span class="select-none">Registro</span>
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink
+            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
+            :class="{ active: route.path == '/CostosPensionados/CosModifiPen' }"
+            to="/CostosPensionados/CosModifiPen"
+          >
+            <span class="select-none">Modificación</span>
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink
+            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
+            :class="{
+              active: route.path == '/CostosPensionados/CosConsultaPen',
+            }"
+            to="/CostosPensionados/CosConsultaPen"
+          >
+            <span class="select-none">Consulta</span>
+          </NuxtLink>
+        </li>
+      </ul>
+    </div>
+    <div class="px-4">
+      <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
         Vehículos Pensionados
       </h3>
       <ul class="mb-5 text-sm font-medium">
@@ -96,7 +134,7 @@ const route = useRoute();
           <NuxtLink
             class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
             :class="{
-              active: route.path == '/Pensionados/PensionadosModificacion',
+              active: route.path == '/Pensionados/PensionadosRegistro',
             }"
             to="/Pensionados/PensionadosRegistro"
           >
@@ -123,6 +161,31 @@ const route = useRoute();
             to="/Pensionados/PensionadosConsulta"
           >
             <span class="select-none">Consulta</span>
+          </NuxtLink>
+        </li>
+      </ul>
+    </div>
+    <div class="px-4">
+      <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
+        Salida del vehículo
+      </h3>
+      <ul class="mb-5 text-sm font-medium">
+        <li>
+          <NuxtLink
+            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
+            :class="{ active: route.path == '/Salida/CobroDelServicio' }"
+            to="/Salida/CobroDelServicio"
+          >
+            <span class="select-none">Cobrar servicio</span>
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink
+            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
+            :class="{ active: route.path == '/Salida/ConsultaDeIngresos' }"
+            to="/Salida/ConsultaDeIngresos"
+          >
+            <span class="select-none">Consultar ingresos</span>
           </NuxtLink>
         </li>
       </ul>
@@ -167,34 +230,16 @@ const route = useRoute();
         </li>
       </ul>
     </div>
-    <div class="px-4">
+    <!-- <div class="px-4">
       <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
-        Salida del vehículo
+        Promociones para servicios adicionales
       </h3>
       <ul class="mb-5 text-sm font-medium">
         <li>
           <NuxtLink
             class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/Salida/CobroDelServicio' }"
-            to="/Salida/CobroDelServicio"
-          >
-            <span class="select-none">Cobrar servicio</span>
-          </NuxtLink>
-        </li>
-      </ul>
-    </div>
-    <div class="px-4">
-      <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
-        Costos para pensionados
-      </h3>
-      <ul class="mb-5 text-sm font-medium">
-        <li>
-          <NuxtLink
-            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{
-              active: route.path == '/CostosPensionados/CosRegistroPen',
-            }"
-            to="/CostosPensionados/CosRegistroPen"
+            :class="{ active: route.path == '/SerAddPromos/Registro' }"
+            to="/SerAddPromos/Registro"
           >
             <span class="select-none">Registro</span>
           </NuxtLink>
@@ -202,8 +247,8 @@ const route = useRoute();
         <li>
           <NuxtLink
             class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/CostosPensionados/CosModifiPen' }"
-            to="/CostosPensionados/CosModifiPen"
+            :class="{ active: route.path == '/SerAddPromos/Modificacion' }"
+            to="/SerAddPromos/Modificacion"
           >
             <span class="select-none">Modificación</span>
           </NuxtLink>
@@ -211,26 +256,24 @@ const route = useRoute();
         <li>
           <NuxtLink
             class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{
-              active: route.path == '/CostosPensionados/CosConsultaPen',
-            }"
-            to="/CostosPensionados/CosConsultaPen"
+            :class="{ active: route.path == '/SerAddPromos/Consulta' }"
+            to="/SerAddPromos/Consulta"
           >
             <span class="select-none">Consulta</span>
           </NuxtLink>
         </li>
       </ul>
-    </div>
-    <div class="px-4">
+    </div> -->
+    <!-- <div class="px-4">
       <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
-        Promociones para pensionados
+        Empleados
       </h3>
       <ul class="mb-5 text-sm font-medium">
         <li>
           <NuxtLink
             class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/Promociones/PromosRegistro' }"
-            to="/Promociones/PromosRegistro"
+            :class="{ active: route.path == '/Empleados/Registro' }"
+            to="/Empleados/Registro"
           >
             <span class="select-none">Registro</span>
           </NuxtLink>
@@ -238,8 +281,8 @@ const route = useRoute();
         <li>
           <NuxtLink
             class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/Promociones/PromosModificacion' }"
-            to="/Promociones/PromosModificacion"
+            :class="{ active: route.path == '/Empleados/Modificacion' }"
+            to="/Empleados/Modificacion"
           >
             <span class="select-none">Modificación</span>
           </NuxtLink>
@@ -247,8 +290,51 @@ const route = useRoute();
         <li>
           <NuxtLink
             class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/Promociones/PromosConsulta' }"
-            to="/Promociones/PromosConsulta"
+            :class="{ active: route.path == '/Empleados/Consulta' }"
+            to="/Empleados/Consulta"
+          >
+            <span class="select-none">Consulta</span>
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink
+            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
+            :class="{ active: route.path == '/Empleados/Baja' }"
+            to="/Empleados/Baja"
+          >
+            <span class="select-none">Baja</span>
+          </NuxtLink>
+        </li>
+      </ul>
+    </div> -->
+    <div class="px-4">
+      <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
+        Proveedores
+      </h3>
+      <ul class="mb-5 text-sm font-medium">
+        <li>
+          <NuxtLink
+            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
+            :class="{ active: route.path == '/Proveedores/Registro' }"
+            to="/Proveedores/Registro"
+          >
+            <span class="select-none">Registro</span>
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink
+            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
+            :class="{ active: route.path == '/Proveedores/Modificacion' }"
+            to="/Proveedores/Modificacion"
+          >
+            <span class="select-none">Modificación</span>
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink
+            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
+            :class="{ active: route.path == '/Proveedores/Consulta' }"
+            to="/Proveedores/Consulta"
           >
             <span class="select-none">Consulta</span>
           </NuxtLink>
@@ -291,16 +377,16 @@ const route = useRoute();
         </li>
       </ul>
     </div>
-    <div class="px-4">
+    <!-- <div class="px-4">
       <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
-        Promociones para servicios adicionales
+        Historial de entregas
       </h3>
       <ul class="mb-5 text-sm font-medium">
         <li>
           <NuxtLink
             class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/SerAddPromos/Registro' }"
-            to="/SerAddPromos/Registro"
+            :class="{ active: route.path == '/PHistorialDeEntregas/Registro' }"
+            to="/PHistorialDeEntregas/Registro"
           >
             <span class="select-none">Registro</span>
           </NuxtLink>
@@ -308,23 +394,14 @@ const route = useRoute();
         <li>
           <NuxtLink
             class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/SerAddPromos/Modificacion' }"
-            to="/SerAddPromos/Modificacion"
-          >
-            <span class="select-none">Modificación</span>
-          </NuxtLink>
-        </li>
-        <li>
-          <NuxtLink
-            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/SerAddPromos/Consulta' }"
-            to="/SerAddPromos/Consulta"
+            :class="{ active: route.path == '/PHistorialDeEntregas/Consulta' }"
+            to="/PHistorialDeEntregas/Consulta"
           >
             <span class="select-none">Consulta</span>
           </NuxtLink>
         </li>
       </ul>
-    </div>
+    </div> -->
     <div class="px-4">
       <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
         Notificación al cliente
@@ -348,43 +425,18 @@ const route = useRoute();
             <span class="select-none">Consulta</span>
           </NuxtLink>
         </li>
-        <li>
-          <NuxtLink
-            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/Notificacion/Factura' }"
-            to="/Notificacion/Factura"
-          >
-            <span class="select-none">Factura</span>
-          </NuxtLink>
-        </li>
       </ul>
     </div>
     <div class="px-4">
       <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
-        Ingresos de salida
+        Promociones
       </h3>
       <ul class="mb-5 text-sm font-medium">
         <li>
           <NuxtLink
             class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/Salida/ConsultaDeIngresos' }"
-            to="/Salida/ConsultaDeIngresos"
-          >
-            <span class="select-none">Consultar ingresos</span>
-          </NuxtLink>
-        </li>
-      </ul>
-    </div>
-    <div class="px-4">
-      <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
-        Empleados
-      </h3>
-      <ul class="mb-5 text-sm font-medium">
-        <li>
-          <NuxtLink
-            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/Empleados/Registro' }"
-            to="/Empleados/Registro"
+            :class="{ active: route.path == '/Promociones/PromosRegistro' }"
+            to="/Promociones/PromosRegistro"
           >
             <span class="select-none">Registro</span>
           </NuxtLink>
@@ -392,8 +444,8 @@ const route = useRoute();
         <li>
           <NuxtLink
             class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/Empleados/Modificacion' }"
-            to="/Empleados/Modificacion"
+            :class="{ active: route.path == '/Promociones/PromosModificacion' }"
+            to="/Promociones/PromosModificacion"
           >
             <span class="select-none">Modificación</span>
           </NuxtLink>
@@ -401,86 +453,8 @@ const route = useRoute();
         <li>
           <NuxtLink
             class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/Empleados/Consulta' }"
-            to="/Empleados/Consulta"
-          >
-            <span class="select-none">Consulta</span>
-          </NuxtLink>
-        </li>
-        <li>
-          <NuxtLink
-            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/Empleados/Baja' }"
-            to="/Empleados/Baja"
-          >
-            <span class="select-none">Baja</span>
-          </NuxtLink>
-        </li>
-      </ul>
-    </div>
-    <div class="px-4">
-      <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
-        Proveedores
-      </h3>
-      <ul class="mb-5 text-sm font-medium">
-        <li>
-          <NuxtLink
-            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/Proveedores/Registro' }"
-            to="/Proveedores/Registro"
-          >
-            <span class="select-none">Registro</span>
-          </NuxtLink>
-        </li>
-        <li>
-          <NuxtLink
-            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/Proveedores/Modificacion' }"
-            to="/Proveedores/Modificacion"
-          >
-            <span class="select-none">Modificación</span>
-          </NuxtLink>
-        </li>
-        <li>
-          <NuxtLink
-            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/Proveedores/Consulta' }"
-            to="/Proveedores/Consulta"
-          >
-            <span class="select-none">Consulta</span>
-          </NuxtLink>
-        </li>
-        <li>
-          <NuxtLink
-            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/Proveedores/Baja' }"
-            to="/Proveedores/Baja"
-          >
-            <span class="select-none">Baja</span>
-          </NuxtLink>
-        </li>
-      </ul>
-    </div>
-
-    <div class="px-4">
-      <h3 class="mb-2 text-xs font-medium uppercase text-gray-500">
-        Historial de entregas
-      </h3>
-      <ul class="mb-5 text-sm font-medium">
-        <li>
-          <NuxtLink
-            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/PHistorialDeEntregas/Registro' }"
-            to="/PHistorialDeEntregas/Registro"
-          >
-            <span class="select-none">Registro</span>
-          </NuxtLink>
-        </li>
-        <li>
-          <NuxtLink
-            class="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-            :class="{ active: route.path == '/PHistorialDeEntregas/Consulta' }"
-            to="/PHistorialDeEntregas/Consulta"
+            :class="{ active: route.path == '/Promociones/PromosConsulta' }"
+            to="/Promociones/PromosConsulta"
           >
             <span class="select-none">Consulta</span>
           </NuxtLink>

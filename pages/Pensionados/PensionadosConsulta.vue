@@ -37,6 +37,7 @@ onMounted(() => {
     registros = [];
   }
   let tabla = document.getElementById('tabla');
+  tabla.innerHTML = '';
   new Grid({
     columns: [
       'Cliente',
@@ -52,6 +53,12 @@ onMounted(() => {
       'Tiempo de estancia',
     ],
     data: registros,
+    search: true,
+    language: {
+      search: {
+        placeholder: 'Buscar',
+      },
+    },
   }).render(tabla);
 });
 </script>

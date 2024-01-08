@@ -1,3 +1,39 @@
 <template>
-    
+  <section class="bg-slate-400">
+    <div class="container p-4">
+      <h1 style="color: black; font-family: Verdana; font-size: 36px">
+        <b>Notificaciones - Consulta</b>
+      </h1>
+    </div>
+    <div id="tabla" class="mt-8 mx-6"></div>
+  </section>
 </template>
+
+<script setup>
+import { onMounted } from 'vue';
+import { Grid } from 'gridjs';
+import 'gridjs/dist/theme/mermaid.css';
+
+onMounted(() => {
+  let registros = JSON.parse(localStorage.getItem('notificaciones'));
+  if (registros) {
+    registros = registros.map((el) => {
+      return [el.id, el.placa, el.titulo, el.mensaje];
+    });
+  } else {
+    registros = [];
+  }
+  let tabla = document.getElementById('tabla');
+  tabla.innerHTML = '';
+  new Grid({
+    columns: ['ID', 'Placa del Cliente', 'Titulo', 'Mensaje'],
+    data: registros,
+    search: true,
+    language: {
+      search: {
+        placeholder: 'Buscar',
+      },
+    },
+  }).render(tabla);
+});
+</script>

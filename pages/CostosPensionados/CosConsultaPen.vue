@@ -2,7 +2,7 @@
   <section class="bg-slate-400">
     <div class="container p-4">
       <h1 style="color: black; font-family: Verdana; font-size: 36px">
-        <b>Costos - Consulta (Entrada de vehículos)</b>
+        <b>Costos para pensionados - Consulta</b>
       </h1>
       <div class="w-3/4 bg-gradienttwo rounded-lg shadow-md">
         <h2
@@ -54,6 +54,7 @@ onMounted(() => {
   }
 
   let tabla = document.getElementById('tabla');
+  tabla.innerHTML = '';
 
   new Grid({
     columns: ['Tiempo de estancia', 'Precio'],

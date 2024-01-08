@@ -1,35 +1,55 @@
 <template>
-   <section class="bg-slate-400">
-        <div class="container p-4">
-            <h1 style="color: black; font-family: Verdana; font-size: 36px;"><b>Inventario - Consulta</b></h1>
-            <MazInput class="mt-8" v-model="buscarArticulo" label="ID Producto"/>
-            <MazBtn class="mt-2 mb-5" color="black">Consultar articulo</MazBtn>                    
-        </div>
-        <div id="tabla" class="mt-8"></div>  
-    </section>
+  <section class="bg-slate-400">
+    <div class="container p-4">
+      <h1 style="color: black; font-family: Verdana; font-size: 36px">
+        <b>Inventario - Consulta</b>
+      </h1>
+    </div>
+    <div id="tabla" class="mt-8"></div>
+  </section>
 </template>
 
-
 <script setup>
-    import { onMounted } from 'vue';
-    import { Grid } from 'gridjs';
-    import { ref } from 'vue'
-    import MazInput from 'maz-ui/components/MazInput'
-    import 'gridjs/dist/theme/mermaid.css';
-  
-    let buscarArticulo = ref('');
+import { onMounted } from 'vue';
+import { Grid, html } from 'gridjs';
+import 'gridjs/dist/theme/mermaid.css';
 
-    onMounted(() => {
-      let tabla = document.getElementById('tabla');
-      new Grid({
-        columns: ['ID proveedor', 'ID producto', 'Nombre', 'Descripcion', 'Precio por unidad', 'Stock', 'Imagen'],
-        data: [
-          ['Joh2n','2282A','Jabon','Ninguna', '$/','10','..'],
-          ['M1ark','2281C','Shampoo','Ninguna', '$/','8', '..'],
-          ['Eo3in','2283R','Polish','Ninguna', '$/','9', '..'],
-          ['Sarah4','2284W','Aceite','Ninguna', '$/','20', '..'],
-          ['5Joel','2288G','Anticongelante','Ninguna', '$/','15', '..'],
-        ],
-      }).render(tabla);
-    });  
+onMounted(() => {
+  let registros = JSON.parse(localStorage.getItem('inventario'));
+  if (registros) {
+    registros = registros.map((el) => {
+      return [
+        el.id,
+        el.proveedor,
+        el.nombre,
+        el.descripcion,
+        el.ppp,
+        el.stock,
+        html(`<image src="${el.imagen}" />`),
+      ];
+    });
+  } else {
+    registros = [];
+  }
+  let tabla = document.getElementById('tabla');
+  tabla.innerHTML = '';
+  new Grid({
+    columns: [
+      'ID Producto',
+      'Proveedor',
+      'Nombre',
+      'Descripcion',
+      'Precio por unidad',
+      'Stock',
+      'Imagen',
+    ],
+    data: registros,
+    search: true,
+    language: {
+      search: {
+        placeholder: 'Buscar',
+      },
+    },
+  }).render(tabla);
+});
 </script>

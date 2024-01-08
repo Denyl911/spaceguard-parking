@@ -54,6 +54,7 @@ onMounted(() => {
   }
 
   let tabla = document.getElementById('tabla');
+  tabla.innerHTML = '';
 
   new Grid({
     columns: ['Tiempo de estancia', 'Precio'],

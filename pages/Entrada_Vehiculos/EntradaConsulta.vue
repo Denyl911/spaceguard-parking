@@ -66,6 +66,7 @@ onMounted(() => {
   }
 
   let tabla = document.getElementById('tabla');
+  tabla.innerHTML = '';
 
   new Grid({
     columns: [

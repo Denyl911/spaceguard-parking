@@ -150,7 +150,7 @@ function Registro() {
     if (servAdd.length > 0) {
       servAdd.forEach((el) => {
         total.value = Number(total.value) + Number(el.costo.substring(1));
-        total = total.value.toFixed(2);
+        total.value = total.value.toFixed(2);
       });
     }
     MostrarTicket();
@@ -191,6 +191,7 @@ function cerrarTicketDialogo() {
 
   const index = registros.findIndex((el) => el.placa == placa.value);
   registros[index].salida = horaImpresion.value;
+  registros[index].total = total.value;
   localStorage.setItem('entrada', JSON.stringify(registros));
 
   toast.success('Cobro registrado exitosamente', {
