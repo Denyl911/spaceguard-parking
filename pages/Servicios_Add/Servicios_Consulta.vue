@@ -4,10 +4,10 @@
       <h1 style="color: black; font-family: Verdana; font-size: 36px">
         <b>Servicios Adicionales - Consulta</b>
       </h1>
-      <MazInput class="mt-8" v-model="buscarPlaca" label="Placa" />
+      <!-- <MazInput class="mt-8" v-model="buscarPlaca" label="Placa" />
       <MazBtn class="mt-2 mb-5" color="black" @click="BuscarPlaca"
         >Consultar servicio asignado a la placa</MazBtn
-      >
+      > -->
     </div>
     <div id="tabla" class="mt-8 mx-5"></div>
   </section>
@@ -57,6 +57,12 @@ onMounted(() => {
       /*'Empleado asignado',*/ 'placa',
     ],
     data: registros,
+    search: true,
+    language: {
+      search: {
+        placeholder: 'Buscar',
+      },
+    },
   }).render(tabla);
 });
 

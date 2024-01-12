@@ -27,7 +27,6 @@
           @input="convertirAMayusculas"
           @keyup.enter="Registro"
           label="Placa"
-          :disabled="lugDisp === 0"
         />
       </div>
       <MazBtn
@@ -37,14 +36,14 @@
         @click="Registro"
         >Buscar</MazBtn
       >
-      <MazBtn
+      <!-- <MazBtn
         rounded
         class="mt-6 w-40"
         color="black"
         pastel
         @click="MostrarTicket"
         >Imprimir ticket</MazBtn
-      >
+      > -->
     </div>
     <div>
       <MazDialog v-model="mostrarTicket" title="Detalle del Ticket" noClose>
@@ -88,23 +87,12 @@ const actualizarHora = () => {
   horaActual.value = new Date().toLocaleTimeString();
 };
 
-onMounted(() => {
-  setInterval(actualizarHora, 1000);
-});
-
-onBeforeUnmount(() => {
-  clearInterval(actualizarHora);
-});
-
 const actualizarFecha = () => {
   fechaActual.value = new Date().toLocaleDateString();
 };
 
-onMounted(() => {
-  setInterval(actualizarFecha, 1000);
-});
-
 onBeforeUnmount(() => {
+  clearInterval(actualizarHora);
   clearInterval(actualizarFecha);
 });
 
@@ -116,6 +104,9 @@ onMounted(() => {
   if (storedLugDisp !== null) {
     lugDisp.value = parseInt(storedLugDisp);
   }
+
+  setInterval(actualizarFecha, 1000);
+  setInterval(actualizarHora, 1000);
 });
 
 const router = useRouter();
