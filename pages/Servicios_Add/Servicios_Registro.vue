@@ -96,6 +96,7 @@ let hora = ref('');
 const mostrarTicket = ref(false);
 
 const router = useRouter();
+const route = useRoute()
 
 let registros = JSON.parse(localStorage.getItem('entrada'));
 onMounted(() => {
@@ -107,7 +108,10 @@ onMounted(() => {
     registros = [];
   }
   // Obtener la última placa ingresada
-  const ultimaPlaca =
+  if(route.query.placa){
+    placaDos.value = route.query.placa
+  } else {
+    const ultimaPlaca =
     registros.length > 0 ? registros[registros.length - 1] : null;
   if (ultimaPlaca) {
     placaDos.value = ultimaPlaca[0];
@@ -115,6 +119,8 @@ onMounted(() => {
     fecha.value = ultimaPlaca[2];
     hora.value = ultimaPlaca[3];
   }
+  }
+  
 });
 
 const registro = () => {

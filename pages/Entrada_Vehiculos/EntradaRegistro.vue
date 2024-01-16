@@ -4,6 +4,7 @@
       <h1 style="color: black; font-family: Verdana; font-size: 36px">
         <b>Entrada de Vehículos - Registro</b>
       </h1>
+      <h2 v-if="lugDisp == 0">No hay lugares Disponibles</h2>
       <MazBtn :key="lugDisp" class="mt-8 mb-5 mr-3" color="black"
         >Lugares disponibles: {{ lugDisp }}</MazBtn
       >
@@ -81,6 +82,7 @@ import { useToast } from 'maz-ui';
 
 const toast = useToast();
 
+
 let placa = ref('');
 let lugDisp = ref(20);
 let horaActual = ref(new Date().toLocaleTimeString());
@@ -94,7 +96,12 @@ const actualizarHora = () => {
 };
 
 onMounted(() => {
+  if (!localStorage.getItem('lugDisp')) {
+  localStorage.setItem('lugDisp', 20)
+}
+
   setInterval(actualizarHora, 1000);
+  lugDisp.value = Number(localStorage.getItem('lugDisp'))
 });
 
 onBeforeUnmount(() => {

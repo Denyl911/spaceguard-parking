@@ -78,7 +78,7 @@
 
         <section class="bg-slate-400">
           <label for="tiempoEstancia">Tiempo de estancia: </label>
-          <select v-model="tiempoEstancia" style="width: 765px; height: 40px">
+          <select v-model="tiempoEstancia" style="width: 35rem; height: 40px">
             <option value="1 semana">1 semana</option>
             <option value="1 mes">1 mes</option>
             <option value="6 meses">6 meses</option>
@@ -92,17 +92,30 @@
       <MazBtn rounded class="mt-6 ml-6" color="warning" @click="MostrarTicket"
         >Imprimir ticket</MazBtn
       >
+      <MazBtn rounded class="mt-6 ml-2" color="warning" @click="ServiciAdd"
+        >Servicio adicional</MazBtn
+      >
     </div>
     <MazDialog v-model="mostrarTicket" title="Detalle del Ticket">
       <p>Placa: {{ Placa }}</p>
       <p>Hora: {{ horaImpresion }}</p>
       <p>Fecha: {{ fechaActual }}</p>
       <p>Lugar asignado: {{ lugDispPensionados }}</p>
+      <p>Tiempo de estancia: {{ tiempoEstancia }}</p>
       <!-- <p>Costo: $10 por hora</p> -->
       <template #footer>
         <MazBtn @click="cerrarTicketDialogo" color="success">Cerrar</MazBtn>
       </template>
     </MazDialog>
+    <MazDialog v-model="mostrarDialogo" title="Agregar Servicio Adicional">
+        <p>¿Deseas agregar un nuevo servicio adicional?</p>
+        <template #footer>
+          <MazBtn @click="agregarServicioAdicional" color="success">
+            Sí
+          </MazBtn>
+          <MazBtn @click="cerrarDialogo" color="error"> No </MazBtn>
+        </template>
+      </MazDialog>
   </section>
 </template>
 
@@ -159,6 +172,7 @@ let carImage = ref('');
 const mostrarTicket = ref(false);
 const router = useRouter();
 const horaImpresion = ref('');
+const mostrarDialogo = ref(false);
 
 onMounted(() => {
   const storedLugDisp = localStorage.getItem('lugDispPensionados');
@@ -166,13 +180,6 @@ onMounted(() => {
     lugDispPensionados.value = parseInt(storedLugDisp);
   }
 });
-
-// const NumeroTelefono = () => {
-//   // Verificar si el input contiene solo números y tiene una longitud de 10
-//   if (/^\d{0,10}$/.test(numeroTelefono.value)) {
-//     setNumeroTelefono(numeroTelefono.values);
-//   }
-// }
 
 const registro = () => {
   if (!/^\d{10}$/.test(numeroTelefono.value)) {
@@ -234,7 +241,9 @@ const registro = () => {
       registros = [data];
     }
     localStorage.setItem('pensionados', JSON.stringify(registros));
-    router.push({ name: 'Pensionados-PensionadosConsulta' });
+    mostrarDialogo.value = true
+    lugDispPensionados.value--;
+    localStorage.setItem('lugDispPensionados', lugDispPensionados.value);
   }
 };
 
@@ -265,6 +274,29 @@ function MostrarTicket() {
 
 function cerrarTicketDialogo() {
   mostrarTicket.value = false;
+  
+}
+
+const agregarServicioAdicional = () => {
+  console.log('si');
+  router.push({ name: 'Servicios_Add-Servicios_Registro', query: { placa: Placa.value } });
+  //cerrarDialogo();
+};
+
+const cerrarDialogo = () => {
+  mostrarDialogo.value = false;
+  router.push({ name: 'Pensionados-PensionadosConsulta' });
+};
+
+function ServiciAdd() {
+  if (!Placa.value) {
+    toast.error('No hay carro para asignarle un servicio', {
+      position: 'bottom',
+      timeout: 3000,
+    });
+  } else {
+    router.push({ name: 'Servicios_Add-Servicios_Registro' });
+  }
 }
 </script>
 
