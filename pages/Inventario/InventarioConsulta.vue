@@ -46,6 +46,7 @@ onMounted(() => {
     data: registros,
     search: true,
     language: {
+      noRecordsFound: 'Busqueda no encontrada',
       search: {
         placeholder: 'Buscar',
       },

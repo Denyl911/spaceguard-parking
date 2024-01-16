@@ -89,7 +89,20 @@
       <MazBtn rounded class="mt-6 w-52" color="info" @click="registro"
         >Registrar</MazBtn
       >
+      <MazBtn rounded class="mt-6 ml-6" color="warning" @click="MostrarTicket"
+        >Imprimir ticket</MazBtn
+      >
     </div>
+    <MazDialog v-model="mostrarTicket" title="Detalle del Ticket">
+      <p>Placa: {{ Placa }}</p>
+      <p>Hora: {{ horaImpresion }}</p>
+      <p>Fecha: {{ fechaActual }}</p>
+      <p>Lugar asignado: {{ lugDispPensionados }}</p>
+      <!-- <p>Costo: $10 por hora</p> -->
+      <template #footer>
+        <MazBtn @click="cerrarTicketDialogo" color="success">Cerrar</MazBtn>
+      </template>
+    </MazDialog>
   </section>
 </template>
 
@@ -143,8 +156,9 @@ let AñoVehiculo = ref('');
 let Placa = ref('');
 let tiempoEstancia = ref('');
 let carImage = ref('');
-
+const mostrarTicket = ref(false);
 const router = useRouter();
+const horaImpresion = ref('');
 
 onMounted(() => {
   const storedLugDisp = localStorage.getItem('lugDispPensionados');
@@ -236,6 +250,22 @@ const handleImageUpload = (event) => {
     reader.readAsDataURL(file);
   }
 };
+
+function MostrarTicket() {
+  if (!Placa.value) {
+    toast.error('No hay información para mostrar en el ticket', {
+      position: 'bottom',
+      timeout: 3000,
+    });
+  } else {
+    horaImpresion.value = new Date().toLocaleTimeString();
+    mostrarTicket.value = true;
+  }
+}
+
+function cerrarTicketDialogo() {
+  mostrarTicket.value = false;
+}
 </script>
 
 <style scoped>

@@ -10,10 +10,10 @@
         label="Placa del vehiculo"
       />
       <MazBtn class="mt-2 mb-5" color="black" @click="buscar"
-        >Buscar datos del cliente</MazBtn
+        >Buscar datos</MazBtn
       >
       <div class="w-3/4 border bg-gradienttwo p-8 rounded-lg shadow-md">
-        <h2 class="mt-8">Datos del cliente:</h2>
+        <!-- <h2 class="mt-8">Datos del cliente:</h2>
         <MazInput
           class="mb-1"
           v-model="nombreCliente"
@@ -28,8 +28,8 @@
           class="mb-1"
           v-model="NumeroEmergencia"
           label="Numero de emergencia"
-        />
-        <MazInput v-model="EstadoCliente" label="Estado del cliente" />
+        /> -->
+        <!-- <MazInput v-model="EstadoCliente" label="Estado del cliente" /> -->
         <h3 class="mt-8">Datos del vehiculo:</h3>
         <MazInput class="mb-1" v-model="ModeloVehiculo" label="Modelo" />
         <MazInput class="mb-1" v-model="MarcaVehiculo" label="Marca" />
@@ -40,7 +40,7 @@
           Foto:
         </h4>
 
-        <div>
+        <div class="mb-4">
           <input type="file" @change="handleImageUpload" accept="image/*" />
           <img
             :src="FotoVehiculo"
@@ -59,9 +59,9 @@
             label="Serivicio adicional"
           />
           <MazInput v-model="Promocion" label="Editar promoción" /> -->
-        <section class="bg-slate-400">
-          <label for="tiempoEstancia">Tiempo de estancia: </label>
-          <select v-model="tiempoEstancia" style="width: 765px; height: 40px">
+        <section class="bg-slate-400 mt-2">
+          <label for="tiempoEstancia">Tiempo de estancia: <br /></label>
+          <select v-model="tiempoEstancia" style="width: 35rem; height: 40px">
             <option value="1 semana">1 semana</option>
             <option value="1 mes">1 mes</option>
             <option value="6 meses">6 meses</option>
@@ -73,10 +73,10 @@
         >Guardar y actualizar</MazBtn
       >
     </div>
-    <div style="float: left; margin-left: 850px">
+    <!-- <div style="float: left; margin-left: 850px">
       <MazBtn class="mt-6 mb-12" color="success">Lugar asignado:<br />9</MazBtn>
     </div>
-    <div style="clear: both"></div>
+    <div style="clear: both"></div> -->
   </section>
 </template>
 

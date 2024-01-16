@@ -4,6 +4,14 @@
       <h1 style="color: black; font-family: Verdana; font-size: 36px">
         <b>Servicios adicionales - Modificación</b>
       </h1>
+      <MazInput
+        class="mt-8"
+        v-model="buscarCliente"
+        label="Placa del vehiculo"
+      />
+      <MazBtn class="mt-2 mb-5" color="black" @click="buscar"
+        >Buscar datos</MazBtn
+      >
       <div class="w-3/4 border bg-gradienttwo p-8 rounded-lg shadow-md mt-2">
         <h2
           style="color: white; font-family: Verdana; font-size: 36px"
@@ -62,6 +70,7 @@ let costo = ref('');
 let materiales = ref('');
 let empleado = ref('');
 let placa = ref('');
+let buscarCliente = ref('');
 
 let registros = [];
 
@@ -70,6 +79,25 @@ const router = useRouter();
 onMounted(() => {
   registros = JSON.parse(localStorage.getItem('servicios'));
 });
+
+const buscar = () => {
+  const reg = registros.find((el) => el.placaDos == buscarCliente.value);
+  if (reg) {
+    placa.value = reg.placaDos;
+    IDSer.value = reg.id;
+    descripcion.value = reg.descripcion;
+    duracion.value = reg.duracion;
+    costo.value = reg.costo;
+    materiales.value = reg.materiales;
+    empleado.value = reg.empleado;
+    ColorVehiculo.value = reg.color;
+  } else {
+    toast.error('Placa no encontrada', {
+      position: 'bottom',
+      timeout: 3000,
+    });
+  }
+};
 
 const actualizar = () => {
   const index = registros.findIndex((el) => el.placaDos == placa.value);
